@@ -88,7 +88,7 @@
 
                                 </div>
 
-                                <div class="cart_totals ">
+                                <div class="cart_totals">
 
                                     <h2>Resumo da Compra</h2>
 
