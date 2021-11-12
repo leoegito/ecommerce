@@ -1,6 +1,6 @@
 <?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html>
 <!--
-    Hcode Store by hcode.com.br
+    Hcode Store - Projeto de e-commerce
 -->
 <html lang="pt-br">
   <head>
@@ -40,7 +40,7 @@
                 <div class="col-md-8">
                     <div class="user-menu">
                         <ul>
-                            <li><a href="#"><i class="fa fa-user"></i> Minha Conta</a></li>
+                            <li><a href="/profile"><i class="fa fa-user"></i> Minha Conta</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Lista de Desejos</a></li>
                             <li><a href="/cart"><i class="fa fa-shopping-cart"></i> Meu Carrinho</a></li>
                             <?php if( checkLogin(false) ){ ?>

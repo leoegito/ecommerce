@@ -2,7 +2,11 @@
 
 use \Hcode\Model\User;
 
-function formatPrice(float $vlprice){
+function formatPrice($vlprice){
+
+	// if(!$vlprice > 0){
+	// 	return $vlprice = 0.00;
+	// }
 
 	return number_format($vlprice, 2, ",", ".");
 

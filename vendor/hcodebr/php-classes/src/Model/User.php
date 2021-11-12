@@ -13,6 +13,7 @@ Class User extends Model{
 	const SECRET_IV = "HcodePhp7_Secret_IV";
 	const ERROR = "UserError";
 	const ERROR_REGISTER = "UserErrorRegister";
+	const SUCCESS = "UserSuccess";
 
 	public static function getFromSession(){
 
@@ -189,7 +190,7 @@ Class User extends Model{
 
 	}
 
-	public static function getForgot($email){
+	public static function getForgot($email, $inadmin = true){
 
 		$sql = new Sql();
 
@@ -225,7 +226,11 @@ Class User extends Model{
 
 				$code = base64_encode($code);
 
-				$link = "http://www.hcodecommerce.com.br/admin/forgot/reset?code=$code";
+				if($inadmin === true){
+					$link = "http://www.hcodecommerce.com.br/admin/forgot/reset?code=$code";
+				} else {
+					$link = "http://www.hcodecommerce.com.br/forgot/reset?code=$code";
+				}
 
 				$mailer = new Mailer($data['desemail'], $data['desperson'], "Redefenir a Senha - Hcode Store", "forgot", array(
 					"name"=>$data['desperson'],
@@ -345,6 +350,40 @@ Class User extends Model{
 		}
 
 	}
+
+	public static function setSuccess($msg)
+	{
+		$_SESSION[User::SUCCESS] = $msg;
+	}
+
+	public static function getSuccess()
+	{
+		
+		$msg = (isset($_SESSION[User::SUCCESS]) && $_SESSION[User::SUCCESS]) ? $_SESSION[User::SUCCESS] : "";
+
+		User::clearSuccess();
+
+		return $msg;
+	}
+
+	public static function clearSuccess()
+	{
+		$_SESSION[User::SUCCESS] = NULL;
+	}
+
+	// public static function setErrorRegister($msg){
+	// 	$_SESSION[User::ERROR_REGISTER] = $msg;
+	// }
+
+	// public static function getErrorRegister(){
+
+	// 	$msg = (isset($_SESSION[User::ERROR_REGISTER]) && $_SESSION[User::ERROR_REGISTER]) ? $_SESSION[User::ERROR_REGISTER] : '';
+
+	// 	User::clearErrorRegister();
+
+	// 	return $msg;
+
+	// }
 
 	public static function getPasswordHash($password){
 		return password_hash($password, PASSWORD_DEFAULT, [
